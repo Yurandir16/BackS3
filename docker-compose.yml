@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+
+  db:
+    restart: always
+    image: postgres:14.4-alpine3.16
+    ports:
+      - 5432:5432
+    volumes:
+      - db-cs:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=d957mlm9iagn2k
+      - POSTGRES_USER=ucyawzfljvbipe
+      - POSTGRES_PASSWORD=7834310579217517b2e136229ce7cb853b5b5924eaa9886b4679776102e78d30
+
+  api:
+    restart: always
+    build: .
+    ports:
+      - 3001:3000
+    volumes:
+      - .:/app_rest
+    depends_on:
+      - db
+    # environment:
+    #   - DB_NAME=csdb
+    #   - DB_USER=csuser
+    #   - DB_PASSWORD=Admin141189@
+    #   - DB_HOST=postgres
+
+volumes:
+  db-cs:
